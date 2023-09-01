@@ -1,14 +1,17 @@
 #!/bin/bash
 
+# This hook appends commit type and hash of commit if possible (on --amend)
+# Needs moreutils package
+
 FILEPATH=$1
 
 TYPE="None"
 [ "$2" != "" ] && TYPE=$2
 
 HASH=""
-[ "$3" != "" ] && HASH=$3
+[ "$3" != "" ] && HASH=$(git rev-parse $3 | head -c8)
 
 HASH_MSG=""
-[ HASH != "" ] && HASH_MSG="Previous commit hash: ${HASH}"
+[ "$HASH" != "" ] && HASH_MSG="Previous commit hash: ${HASH}\n"
 
-cat <(printf "Commit type: %s\n%s\n" "$TYPE" "$HASH_MSG") $FILEPATH | tee 1>/dev/null $FILEPATH
+cat <(printf "Commit type: %s\n%s" "$TYPE" "$HASH" "$HASH_MSG") $FILEPATH | sponge $FILEPATH

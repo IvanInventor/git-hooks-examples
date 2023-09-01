@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Writes commit hash into header file with GIT_HASH macro
+
+HASH=$(git rev-list HEAD --max-count=1 | head -c10)
+
+printf '#define GIT_HASH "%s"' $HASH > git_hash.h

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# This hooks notifies jenkins to build application (jenkins runs on localhost in this example)
+# Set user.api-key config variable to generated api key
+
+URL="localhost:8090/job/Build-program/build"
+USER="admin"
+
+curl -X POST "$URL" --user $USER:$(git config user.api-key)

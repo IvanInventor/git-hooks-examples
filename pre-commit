@@ -8,5 +8,5 @@
 # Changing plugin version before commit
 pwd
 echo "Change version"
-vim -- version.cfg && { git add version.cfg && exit 0;}
+$(git config core.editor) version.cfg && { git add version.cfg && exit 0;}
 exit 1

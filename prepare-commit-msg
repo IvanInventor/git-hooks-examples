@@ -1,0 +1,14 @@
+#!/bin/bash
+
+FILEPATH=$1
+
+TYPE="None"
+[ "$2" != "" ] && TYPE=$2
+
+HASH=""
+[ "$3" != "" ] && HASH=$3
+
+HASH_MSG=""
+[ HASH != "" ] && HASH_MSG="Previous commit hash: ${HASH}"
+
+cat <(printf "Commit type: %s\n%s\n" "$TYPE" "$HASH_MSG") $FILEPATH | tee 1>/dev/null $FILEPATH

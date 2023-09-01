@@ -4,6 +4,5 @@
 # Set user.api-key config variable to generated api key
 
 URL="localhost:8090/job/Build-program/build"
-USER="admin"
 
-curl -X POST "$URL" --user $USER:$(git config user.api-key)
+curl -X POST "$URL" --user $(git config user.jenkins-user):$(git config user.jenkins-api-key)
